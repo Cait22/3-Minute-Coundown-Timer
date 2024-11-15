@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-Minute Countdown Timer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 5em;
+        }
+    </style>
+</head>
+<body>
+    <div id="timer">3:00</div>
+
+    <!-- Audio element for the buzzer sound -->
+    <audio id="buzzer-sound" src="buzzer.mp3"></audio>
+
+    <script>
+        let time = 180; // 3 minutes in seconds
+
+        function startCountdown() {
+            const timerDisplay = document.getElementById("timer");
+            const buzzerSound = document.getElementById("buzzer-sound");
+
+            const countdown = setInterval(() => {
+                const minutes = Math.floor(time / 60);
+                const seconds = time % 60;
+                timerDisplay.textContent = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+                time--;
+
+                if (time < 0) {
+                    clearInterval(countdown);
+                    timerDisplay.textContent = "Time's up!";
+                    buzzerSound.play(); // Play the buzzer sound
+                }
+            }, 1000);
+        }
+
+        window.onload = startCountdown;
+    </script>
+</body>
+</htm
